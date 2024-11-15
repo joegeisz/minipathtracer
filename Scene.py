@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class Scene:
     """Scene Class"""
     def __init__(self,object_list,camera):

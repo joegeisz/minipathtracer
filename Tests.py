@@ -1,4 +1,5 @@
-from Objects import *
+from SpecialObjects import *
+from Primatives import *
 
 def test1():
     # does the ray intersect the sphere correctly?

@@ -1,5 +1,6 @@
 from Scene import *
-from Objects import *
+from SpecialObjects import *
+from Primatives import *
 import matplotlib.pyplot as plt 
 
 plane = Plane([0,0,1],0)
