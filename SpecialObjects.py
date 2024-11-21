@@ -7,6 +7,7 @@ class Ray:
         direction = np.array(direction).astype(float)
         self.dir = direction/np.linalg.norm(direction)
 
+
 class Camera:
     """Camera Class"""
     def __init__(self,center,point_at,xpix,ypix,width):
