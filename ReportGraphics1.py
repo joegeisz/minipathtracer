@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == '__main__':
-    plane = Plane([0,0,1],0, reflectance = [.5,.5,.5],emmitance = [0,0,0])
+    plane = Plane([0,0,1],0, reflectance = [.5,.5,.5],emmitance = [0.1,0.1,0.1])
     Red_Sphere = Sphere([12,12,2],2, reflectance = [1,0,0], emmitance = [0,0,0])
     Blue_Sphere = Sphere([7,10,1],1, reflectance = [0,0,1], emmitance = [0,0,0])
     Green_Sphere = Sphere([11,8,0.5],0.5,reflectance = [0,1,0], emmitance = [0,0,0])
@@ -16,8 +16,7 @@ if __name__ == '__main__':
 
     plt.figure()
     plt.imshow(layout.object_image())
-
-
+    plt.plot([125],[125],'b+')
     plt.show()
 
 

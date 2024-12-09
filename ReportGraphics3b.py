@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == '__main__':
-    samples = glob.glob("data/*.npy")
+    samples = glob.glob("data1/*.npy")
     img = np.zeros_like(np.load(samples[0]))
     views = [1,10,100,1000]
     for i, sample in enumerate(samples):
