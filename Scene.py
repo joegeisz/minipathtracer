@@ -47,11 +47,17 @@ class Scene:
             img[y,x,:] = self.trace_path(ray,0,maxsteps)                    
         return img
     
-    def path_trace_image(self,samples,maxsteps=5,n_processors = 4):
+    def path_trace_image(self,samples,n_processors = 4):
         img = np.zeros([self.camera.ny,self.camera.nx,3]).astype(float)
         with Pool(n_processors) as p:
             imgs = np.array(p.map(mp_path_trace, [copy.copy(self) for i in range(samples)]))
         img = np.mean(imgs,0)
+        return img
+    
+    def save_path_trace_images(self,samples,maxsteps=5,n_processors = 4):
+        img = np.zeros([self.camera.ny,self.camera.nx,3]).astype(float)
+        with Pool(n_processors) as p:
+            p.map(mp_path_trace_save, [[copy.copy(self),i] for i in range(samples)])
         return img
     
     def color_mix_random_walk(self,start_ray, maxsteps):
@@ -139,20 +145,11 @@ class Scene:
         return img
     
     def object_image(self):
-        background_color = [0,0,0]
-        img = np.zeros([self.camera.ny,self.camera.nx,3]).astype(int)
-        time_img = np.full([self.camera.ny,self.camera.nx],np.inf)
-        img[:,:,0] = background_color[0]
-        img[:,:,1] = background_color[1]
-        img[:,:,2] = background_color[2]
-        ob_colors = np.random.randint(0,255,[self.nobjects,3])
+        img = np.zeros([self.camera.ny,self.camera.nx,3]).astype(float)
         for ray, x, y in self.camera.iterate_rays():
-            for i, ob in enumerate(self.objects):
-                intersect_time = ob.ray_time(ray)
-                if (not np.isnan(intersect_time)) and (intersect_time < time_img[y,x]) :
-                    img[y,x,:] = ob_colors[i,:]
-                    time_img[y,x] = intersect_time
-                    
+            ob,_,_,_ = self.object_hit(ray)
+            if ob != -1:
+                img[y,x,:] = self.objects[ob].reflectance
         return img
     
     def object_images(self):
@@ -171,3 +168,10 @@ def mp_color_mix_image(scene):
 
 def mp_path_trace(scene):
     return scene.path_image()
+
+def mp_path_trace_save(scene_num):
+    scene = scene_num[0]
+    num = scene_num[1]
+    img = scene.path_image()
+    filename = "data/sample" + str(num) + ".npy"
+    np.save(filename,img)
