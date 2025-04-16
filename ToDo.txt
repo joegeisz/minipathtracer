@@ -1,0 +1,6 @@
+Add more primatives 
+    rectangles/polygons
+    meshes
+Add more BRDF's
+    specular/mirror
+    ...?

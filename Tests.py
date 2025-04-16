@@ -43,10 +43,6 @@ def test4():
     else: 
         print("Test 4 correct")
         
-test1()
-test2()
-test3()
-test4()
 
 #plotting tests
 def plot_test1():
@@ -55,4 +51,11 @@ def plot_test1():
     plt.title("should look like right side of sphere")
     plt.show()
 
-plot_test1()
+
+
+if __name__ == "__main__":
+    test1()
+    test2()
+    test3()
+    test4()
+    plot_test1()
