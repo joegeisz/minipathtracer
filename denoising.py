@@ -34,12 +34,12 @@ if __name__ == '__main__':
     tri = Tri([12,5,5],[5,12,5],[12,12,5],
                 material_color = [0,0,0],
                 reflectance = [1,1,1], 
-                emmitance = [1,1,1])
+                emmitance = [2,2,2])
     
     tri2 = Tri([12,5,5],[5,5,5],[5,12,5],
                 material_color = [0,0,0],
                 reflectance = [1,1,1], 
-                emmitance = [1,1,1])
+                emmitance = [2,2,2])
     
     cam = Camera([0,0,5],[10,10,2],256,256,0.5)
 
@@ -48,9 +48,9 @@ if __name__ == '__main__':
     plt.figure()
     plt.imshow(layout.object_image())
 
-    renderedim = layout.path_trace_image(7*1,n_processors=7)
-    plt.figure()
-    plt.imshow(layout)
+    renderedim = layout.path_trace_image(7*3,n_processors=7)
+    np.save("image1.np",renderedim)
+    
 
     # plt.figure()
     # plt.imshow(layout.normal_image())

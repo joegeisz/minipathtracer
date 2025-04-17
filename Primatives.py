@@ -78,7 +78,7 @@ class Plane(Primative):
         return intersect, t, normal
 
 class Tri(Primative):
-    """Rectangle Class - like plane but bounded"""
+    """Triangle Class - tri"""
 
     def __init__(self,p1,p2,p3,**kwargs):
         super().__init__(**kwargs)
